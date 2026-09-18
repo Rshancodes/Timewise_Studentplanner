@@ -5,7 +5,7 @@ import org.junit.Test;
 public class OcampoTest {
     @Test
     public void printMyProfile() {
-        // --- 1. THE INPUT (storing your personal details ij,yhglihblijkn variables) ---
+        // --- 1. THE INPUT (storing your personal details ij,yhglihblidawdjkn variables) ---
         String myName = "Rayshan";
         String petName = "Bornok";
         String favFood = "Sinigang na baboy";
