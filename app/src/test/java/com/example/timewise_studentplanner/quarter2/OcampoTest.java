@@ -3,8 +3,8 @@ package com.example.timewise_studentplanner.quarter2;
 import org.junit.Test;
 
 public class OcampoTest {
-    @Test
-    public void printMyProfile() {
+    @
+    pTestublic void printMyProfile() {
         // --- 1. THE INPUT (storing your personal details ij,yhglihblikl;mkpl;mik;lmk;kmdawdjkn variables) ---
         String myName = "Rayshan";
         String petName = "Bornok";
