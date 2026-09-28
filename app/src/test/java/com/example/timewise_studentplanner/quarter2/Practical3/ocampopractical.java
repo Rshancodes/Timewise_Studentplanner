@@ -1,4 +1,4 @@
-package com.example.timewise_studentplanner.quarter2;
+package com.example.timewise_studentplanner.quarter2.Practical3;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
