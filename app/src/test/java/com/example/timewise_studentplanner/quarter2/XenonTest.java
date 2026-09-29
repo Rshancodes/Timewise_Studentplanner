@@ -1,4 +1,5 @@
-package com.example.timewise_studentplanner.quarter2;
+}
+        package com.example.timewise_studentplanner.quarter2;
 
 import org.junit.Test;
 
@@ -17,4 +18,3 @@ public class XenonTest {
         System.out.println("I have a wonderful pet named " + petName + ".");
         System.out.println("If I could, I would eat " + favFood + " every single day!");
     }
-}
