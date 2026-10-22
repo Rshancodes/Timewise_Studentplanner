@@ -1,19 +1,89 @@
-package com.example.timewise_studentplanner.quarter2;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import org.junit.Test;
+// Remove 'public' keyword if putting this class inside Main.java
+class Account {
+    String studentName;
+    int studentID;
+    int studentPIN;
+    int infractionTotal;
+    Infraction[] infractions;
 
-public class DelaVegaTest {
-            public void printMyProfile() {
-        // --- 1. THE INPUT (storing your personal details ij,yhglihblikl;mkpl;mik;lmk;kmdawdjkn variables) ---
-        String myName = "DelaVega";
-        String petName = "Blacky";
-        String favFood = "Sinigang";
-        int myAge = 17;
+    private static int idCounter = 1000;
 
-        // --- 2. THE OUTPUT (Printing to the console) ---
-        System.out.println("--- MY DIGITAL PROFILE ---");
-        System.out.println("Hello, my name is " + myName + " and I am " + myAge + " years old.");
-        System.out.println("I have a wonderful pet named " + petName + ".");
-        System.out.println("If I could, I would eat " + favFood + " every single day!");
+    public Account(String name, int PIN) {
+        this.studentName = name;
+        this.studentPIN = PIN;
+        this.studentID = ++idCounter;
+        this.infractionTotal = 0;
+        this.infractions = new Infraction[10];
+    }
+
+    public boolean logIn(String name, int PIN) {
+        if (this.studentName.equalsIgnoreCase(name) && this.studentPIN == PIN) {
+            System.out.println("success");
+            return true;
+        } else {
+            System.out.println("Login failed: Incorrect name or PIN.");
+            return false;
+        }
+    }
+
+    public void addInfractionToRecord(Infraction infraction) {
+        if (infractionTotal >= infractions.length) {
+            Infraction[] newArray = new Infraction[infractions.length * 2];
+            System.arraycopy(infractions, 0, newArray, 0, infractions.length);
+            infractions = newArray;
+        }
+        infractions[infractionTotal] = infraction;
+        infractionTotal++;
+    }
+
+    public void record() {
+        System.out.println("\n--- STUDENT RECORD ---");
+        System.out.println("Student Name: " + studentName);
+        System.out.println("Student ID:   " + studentID);
+        System.out.println("Total Infractions: " + infractionTotal);
+        System.out.println("----------------------");
+
+        if (infractionTotal == 0) {
+            System.out.println("No infractions recorded.");
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            for (int i = 0; i < infractionTotal; i++) {
+                Infraction inf = infractions[i];
+                System.out.println((i + 1) + ". " + inf.infractionName
+                        + " (Degree: " + inf.infractionDegree + ") - Date: "
+                        + inf.infractionTime.format(formatter));
+            }
+        }
+        System.out.println("----------------------\n");
+    }
+}
+
+// Package-private Infraction class inside the same file
+class Infraction {
+    String infractionName;
+    int infractionDegree;
+    LocalDateTime infractionTime;
+
+    public Infraction(String infractionName, int infractionDegree, LocalDateTime infractionTime) {
+        this.infractionName = infractionName;
+        this.infractionDegree = infractionDegree;
+        this.infractionTime = infractionTime;
+    }
+
+    public static void add(String infractionName, int degree, LocalDateTime now, Account student) {
+        Infraction newInfraction = new Infraction(infractionName, degree, now);
+        student.addInfractionToRecord(newInfraction);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Account acc = new Account("John Doe", 1234);
+        acc.logIn("John Doe", 1234);
+        Infraction.add("Tardiness", 1, LocalDateTime.now(), acc);
+        acc.record();
     }
 }
